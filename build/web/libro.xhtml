@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+            <meta charset="utf-8" name="viewport"
+                    content="width=device-width, initial-scale=1"
+                    http-equiv="X-UA-Conpatible" />
+            <title>Inicio</title>
+            
+    </h:head>
+    <h:body>
+        <h1 style="margin-left: 40%; color: gray;"><b>Libreria : Libros</b></h1>
+        <h:form>
+            <p:commandButton value="inicio" action="#{libroBean.cambiar()}"></p:commandButton>
+         </h:form>
+        <h:form>
+            <div style="float:left; margin-top: 25px;">
+
+                <h:panelGrid>
+                    <p:outputLabel value="ISBN" ></p:outputLabel>
+                    <p:inputText value="#{libroBean.ISBN}" ></p:inputText>
+
+                    <p:outputLabel value="Titulo"></p:outputLabel>
+                    <p:inputText value="#{libroBean.titulo}"></p:inputText>
+
+                    <p:outputLabel value="Descripcion" ></p:outputLabel>
+                    <p:inputTextarea value="#{libroBean.descripcion}"></p:inputTextarea>
+
+                    <p:outputLabel value="Autor" ></p:outputLabel>
+                    <p:inputText value="#{libroBean.autor}"></p:inputText>
+
+                    <p:outputLabel value="Paginas" ></p:outputLabel>
+                    <p:inputText value="#{libroBean.paginas}"></p:inputText>
+
+                    <p:outputLabel value="Edición"></p:outputLabel>
+                    <p:inputText value="#{libroBean.edicion}"></p:inputText>
+
+                </h:panelGrid>
+                <tr> <td>
+                        <p:commandButton value="Guardar" actionListener="#{libroBean.guardar}" update="dtable"></p:commandButton></td></tr>
+
+                <p:dataTable id="dtable" value="#{libroBean.listar()}" var="libro" style="float:right; margin-top: 25px;">
+
+                    <p:column>
+                        <f:facet name="header" >ISBN</f:facet>
+                        <h:outputText value="#{libro.ISBN}"></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header" >AUTOR</f:facet>
+                        <h:outputText value="#{libro.autor}"></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header" >Descripción</f:facet>
+                        <h:outputText value="#{libro.descripcion}"></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header" >Edición</f:facet>
+                        <h:outputText value="#{libro.edicion}"></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header" >Páginas</f:facet>
+                        <h:outputText value="#{libro.paginas}"></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header" >Título</f:facet>
+                        <h:outputText value="#{libro.titulo}"></h:outputText>
+                    </p:column>  
+                </p:dataTable>
+            </div>
+        </h:form>        
+        
+    </h:body>
+   
+
+    
+</html>

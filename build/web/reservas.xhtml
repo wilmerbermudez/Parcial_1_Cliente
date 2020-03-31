@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+            <meta charset="utf-8" name="viewport"
+                    content="width=device-width, initial-scale=1"
+                    http-equiv="X-UA-Conpatible" />
+            <title>Inicio</title>
+            
+    </h:head>
+    <h:body>
+        <h1 style="margin-left: 40%; color: gray;"><b>Libreria : Libros</b></h1>
+        <h:form>
+            <h:commandButton value="inicio" action="#{reservaBean.cambiar()}"></h:commandButton>
+
+        </h:form>        
+        <div style="float:left; margin-top: 25px;">
+            
+            <h:form>
+                
+                <h:panelGrid>             
+                     <h:outputLabel value="Id" for="id"></h:outputLabel>
+                     <h:inputText value="#{reservaBean.id}"></h:inputText>
+                     
+                    <h:outputLabel value="Libros Disponibles" for="librosReservados"></h:outputLabel>
+         
+                    <p:outputLabel value="Libros"></p:outputLabel>
+                    <p:selectOneMenu id="libroSeleccionado" value="#{reservaBean.libroSeleccionado.ISBN}">
+                        <f:selectItem itemLabel="--Seleccione--" itemValue=""></f:selectItem>
+                        <f:selectItems value="#{reservaBean.librosCombo}"></f:selectItems>
+                    </p:selectOneMenu>
+                    <p:commandButton value="Agregar" actionListener="#{reservaBean.guardarItem()}" update="dtabla"></p:commandButton>
+                    
+                   
+
+                    <p:dataTable id="dtabla" value="#{reservaBean.libros}" var="libro" style="width: 160px">
+                            <p:column>
+                                <f:facet name="header" >ISBN</f:facet>
+                                <h:outputText value="#{libro.ISBN}"></h:outputText>
+                            </p:column>
+                            
+                            <p:column>
+                                <p:commandLink value="Eliminar" actionListener="#{reservaBean.eliminarItem(libro)}" update="dtabla"></p:commandLink>
+                            </p:column>
+                        </p:dataTable>
+
+                    
+                    
+
+
+                </h:panelGrid>
+                <tr> <td><h:commandButton value="Submit" actionListener="#{reservaBean.guardar}"></h:commandButton></td></tr>
+            </h:form>
+            
+        </div>
+        
+        <div style="float:right; margin-left: 10px; margin-top: 25px;">
+            <h:form>
+                <p:dataTable  value="#{reservaBean.listarReservasActivas()}" var="reserva" style="width: 1070px;">
+
+                    <p:column>
+                        <f:facet name="header" >PERSONA</f:facet>
+                        <h:outputText value="#{reserva.id}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header" >RESERVA</f:facet>
+                        <h:outputText value="#{reserva.reserva.id}"></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header" >FECHA ENTREGA</f:facet>
+                        <h:outputText value="#{reserva.reserva.fechaEntrega}"></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header" >FECHA PRESTAMO</f:facet>
+                        <h:outputText value="#{reserva.reserva.fechaPrestamo}"></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header" >LIBROS</f:facet>
+                        <p:selectOneMenu>
+                            <f:selectItems value="#{reserva.reserva.libros}"></f:selectItems>
+                        </p:selectOneMenu>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </div>
+        
+        
+       
+    </h:body>
+   
+
+    
+</html>

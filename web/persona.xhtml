@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+            <meta charset="utf-8" name="viewport"
+                    content="width=device-width, initial-scale=1"
+                    http-equiv="X-UA-Conpatible" />
+            <title>Inicio</title>
+            
+    </h:head>
+    <h:body>
+        <h1 style="margin-left: 40%; color: gray;"><b>Libreria : Libros</b></h1>
+        <h:form>
+            <h:commandButton value="inicio" action="#{personaBean.cambiar()}"></h:commandButton>
+
+        </h:form>        
+        <div style="float:left; margin-top: 25px;">
+            
+            <h:form>
+                
+                <h:panelGrid>
+                    <h:outputLabel value="Id" for="id"></h:outputLabel>
+                    <h:inputText value="#{personaBean.id}"></h:inputText>
+
+                    <h:outputLabel value="Nombre" for="nombre"></h:outputLabel>
+                    <h:inputText value="#{personaBean.nombre}"></h:inputText>
+                </h:panelGrid>
+                <tr> <td><h:commandButton value="Submit" actionListener="#{personaBean.guardar}"></h:commandButton></td></tr>
+            </h:form>
+        </div>
+        <div style="float:right;  margin-top: 25px;">
+            
+            <h:form>
+                <p:dataTable  value="#{personaBean.listar()}" var="persona">
+
+                    <p:column>
+                        <f:facet name="header" >ID</f:facet>
+                        <h:outputText value="#{persona.id}"></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header" >NOMBRE</f:facet>
+                        <h:outputText value="#{persona.nombre}"></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header" >RESERVA</f:facet>
+                        <h:outputText rendered="#{persona.reserva.id == null}" value="Sin Reservacion"></h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+    </h:body>
+   
+
+    
+</html>
